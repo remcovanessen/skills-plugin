@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Label guide
-Description:  Add skill level, estimated reading/completion time and author details to each blogpost with just a few clicks.
+Description: Add a skill label, reading time and author details to your blog posts and pages.
 Author: Remco van Essen
 Version: 1.0
 Author URI: https://remcovanessen.co.uk
