@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Skill Level
+Plugin Name: Label guide
 Description:  Add skill level, estimated reading/completion time and author details to each blogpost with just a few clicks.
 Author: Remco van Essen
 Version: 1.0
@@ -64,7 +64,7 @@ function ski_init()
 		'has_archive' => false, 
 		'hierarchical' => false,
 		'menu_position' => null,
-		'menu_icon' => plugins_url('label.png', __FILE__),
+		'menu_icon' => plugins_url('assets/label_1.png', __FILE__),
 		'supports' => array( 'title' )
 	); 
 	register_post_type('skill-label', $args);
