@@ -24,7 +24,6 @@ This plugin is forked from the Easy Nutrition Facts Label plugin found at https:
 
 4. Include the shortcode [skill-label id=666] where you want a specific label to be displayed. 
 
-
 == Screenshots ==
 
 1. Skill label added to page

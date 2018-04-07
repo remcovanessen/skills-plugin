@@ -9,8 +9,6 @@ Author URI: https://remcovanessen.co.uk
 Forked from: http://halgatewood.com/easy-skill-facts-label
 */
 
-
-
 /* ADDS */
 add_shortcode( 'skill-label', 'ski_label_shortcode');
 add_action( 'wp_head', 'ski_style');
@@ -22,7 +20,7 @@ add_action( 'add_meta_boxes', 'ski_create_metaboxes' );
 add_action( 'save_post', 'ski_save_meta', 1, 2 );
 
 
-/* BASE skiIIONAL FIELDS */
+/* BASE FIELDS */
 $skiional_fields = array(
 					'skilllevel' 		=> __('Skill Level'),
 					'estimatedtime' 	=> __('Estimated Time'),
@@ -72,8 +70,6 @@ function ski_init()
 	register_post_type('skill-label', $args);
 
 }
-
-
 
 /*
  * Meta Box with Data
@@ -291,7 +287,7 @@ function ski_label_generate( $id, $width = 22 )
 	{
 		$$name = $label['_' . $name][0];	
 	}
-$rtn = $_POST['rtn'] ?? '';
+	$rtn = $_POST['rtn'] ?? '';
 
 	
 	$rtn .= " <div class='slider'>";
