@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Label guide
+Plugin Name: Custom Label Guide
 Description: Add a skill label, reading time and author details to your blog posts and pages.
 Author: Remco van Essen
 Version: 1.0
@@ -10,14 +10,14 @@ Forked from: http://halgatewood.com/easy-skill-facts-label
 */
 
 /* ADDS */
-add_shortcode( 'skill-label', 'ski_label_shortcode');
-add_action( 'wp_head', 'ski_style');
-add_action( 'init', 'ski_init');
-add_filter( 'manage_edit-skill-label_columns', 'ski_modify_skillal_label_table' );
-add_filter( 'manage_posts_custom_column', 'ski_modify_skillal_label_table_row', 10, 2 );
+add_shortcode( 'clg-label', 'clguide_label_shortcode');
+add_action( 'wp_head', 'clguide_style');
+add_action( 'init', 'clguide_init');
+add_filter( 'manage_edit-clg-label_columns', 'clguide_modify_skillal_label_table' );
+add_filter( 'manage_posts_custom_column', 'clguide_modify_skillal_label_table_row', 10, 2 );
 
-add_action( 'add_meta_boxes', 'ski_create_metaboxes' );
-add_action( 'save_post', 'ski_save_meta', 1, 2 );
+add_action( 'add_meta_boxes', 'clguide_create_metaboxes' );
+add_action( 'save_post', 'clguide_save_meta', 1, 2 );
 
 
 /* BASE FIELDS */
@@ -31,9 +31,9 @@ $skiional_fields = array(
 /*
  * Init
  */
-function ski_init()
+function clguide_init()
 {
-	load_plugin_textdomain('wp-skill-label', false, 'wp-skill-label/languages/');
+	load_plugin_textdomain('wp-clg-label', false, 'wp-clg-label/languages/');
 
 	$labels = array(
 		'name' => __('Skill labels'),
@@ -64,23 +64,23 @@ function ski_init()
 		'has_archive' => false, 
 		'hierarchical' => false,
 		'menu_position' => null,
-		'menu_icon' => plugins_url('assets/label_1.png', __FILE__),
+		'menu_icon' => plugins_url('clguide_assets/label_1.png', __FILE__),
 		'supports' => array( 'title' )
 	); 
-	register_post_type('skill-label', $args);
+	register_post_type('clg-label', $args);
 
 }
 
 /*
  * Meta Box with Data
  */
-function ski_create_metaboxes()
+function clguide_create_metaboxes()
 {
-	add_meta_box( 'ski_create_metabox_1', 'Skill Label Options', 'ski_create_metabox_1', 'skill-label', 'normal', 'default' );
+	add_meta_box( 'clguide_create_metabox_1', 'Skill Label Options', 'clguide_create_metabox_1', 'clg-label', 'normal', 'default' );
 
 }
 
-function ski_create_metabox_1()
+function clguide_create_metabox_1()
 {
 	global $post, $skiional_fields;	
 	$meta_values = get_post_meta( $post->ID );
@@ -111,7 +111,7 @@ function ski_create_metabox_1()
 	}
 }
 
-function ski_save_meta( $post_id, $post ) 
+function clguide_save_meta( $post_id, $post ) 
 {
 	global $skiional_fields;
 	foreach( $skiional_fields as $name => $skiional_field ) 
@@ -130,23 +130,23 @@ function ski_save_meta( $post_id, $post )
  * 2 Functions
  */
  
-function ski_modify_skillal_label_table( $column ) 
+function clguide_modify_skillal_label_table( $column ) 
 { 
 
 	$columns = array(
 		'cb'       			=> '<input type="checkbox" />',
 		'title'    			=> 'Title',
-		'ski_shortcode'    => 'Shortcode',
+		'clguide_shortcode'    => 'Shortcode',
 		'date'     			=> 'Date'
 	);
 
 	return $columns;
 }
-function ski_modify_skillal_label_table_row( $column_name, $post_id ) 
+function clguide_modify_skillal_label_table_row( $column_name, $post_id ) 
 {
- 	if($column_name == "ski_shortcode")
+ 	if($column_name == "clguide_shortcode")
  	{
- 		echo "[skill-label id={$post_id}]";
+ 		echo "[clg-label id={$post_id}]";
  	}
  	
 }
@@ -158,22 +158,22 @@ function ski_modify_skillal_label_table_row( $column_name, $post_id )
  *
  * @return void
  */
-function ski_style() 
+function clguide_style() 
 {
 ?>
 
 <style type='text/css'>
-	.wp-skill-label { border: 1px solid #ccc; font-family: helvetica, arial, sans-serif; font-size: .9em; width: 22em; padding: 1em 1.25em 1em 1.25em; line-height: 1.4em; margin: 1em; }
-	.wp-skill-label hr { border:none; border-bottom: solid 8px #666; margin: 3px 0px; }
-	.wp-skill-label .heading { font-size: 2.6em; font-weight: 900; margin: 0; line-height: 1em; }
-	.wp-skill-label .indent { margin-left: 1em; }
-	.wp-skill-label .small { font-size: .8em; line-height: 1.2em; }
-	.wp-skill-label .item_row { border-top: solid 1px #ccc; padding: 3px 0; }
-	.wp-skill-label .amount-per { padding: 0 0 8px 0; }
-	.wp-skill-label .daily-value { padding: 0 0 8px 0; font-weight: bold; text-align: right; border-top: solid 4px #666; }
-	.wp-skill-label .f-left { float: left; }
-	.wp-skill-label .f-right { float: right; }
-	.wp-skill-label .noborder { border: none; }
+	.wp-clg-label { border: 1px solid #ccc; font-family: helvetica, arial, sans-serif; font-size: .9em; width: 22em; padding: 1em 1.25em 1em 1.25em; line-height: 1.4em; margin: 1em; }
+	.wp-clg-label hr { border:none; border-bottom: solid 8px #666; margin: 3px 0px; }
+	.wp-clg-label .heading { font-size: 2.6em; font-weight: 900; margin: 0; line-height: 1em; }
+	.wp-clg-label .indent { margin-left: 1em; }
+	.wp-clg-label .small { font-size: .8em; line-height: 1.2em; }
+	.wp-clg-label .item_row { border-top: solid 1px #ccc; padding: 3px 0; }
+	.wp-clg-label .amount-per { padding: 0 0 8px 0; }
+	.wp-clg-label .daily-value { padding: 0 0 8px 0; font-weight: bold; text-align: right; border-top: solid 4px #666; }
+	.wp-clg-label .f-left { float: left; }
+	.wp-clg-label .f-right { float: right; }
+	.wp-clg-label .noborder { border: none; }
 	
 	.cf:before,.cf:after { content: " "; display: table;}
 	.cf:after { clear: both; }
@@ -238,21 +238,21 @@ li:nth-child(1) {
  * @param array $atts
  * @return string
  */
-function ski_label_shortcode($atts) 
+function clguide_label_shortcode($atts) 
 {
 	$id = (int) isset($atts['id']) ? $atts['id'] : false;
 	$width = (int) isset($atts['width']) ? $atts['width'] : 22;	
 	
-	if($id) { return ski_label_generate($id, $width); }
+	if($id) { return clguide_label_generate($id, $width); }
 	{
 		global $post;
 	
-		$label = get_posts( array( 'post_type' => 'skill-label', 'meta_key' => '_pageid', 'meta_value' => $post->ID ));
+		$label = get_posts( array( 'post_type' => 'clg-label', 'meta_key' => '_pageid', 'meta_value' => $post->ID ));
 		
 		if($label)
 		{
 			$label = reset($label);
-			return ski_label_generate( $label->ID, $width );
+			return clguide_label_generate( $label->ID, $width );
 
 		}
 	}
@@ -264,7 +264,7 @@ function ski_label_shortcode($atts)
  * @param integer $reference
  * @return integer
  */
-function ski_percentage($contains, $reference) 
+function clguide_percentage($contains, $reference) 
 {
 	return round( $contains / $reference * 100 );
 }
@@ -274,7 +274,7 @@ function ski_percentage($contains, $reference)
  * @param array $args
  * @return string
  */
-function ski_label_generate( $id, $width = 22 ) 
+function clguide_label_generate( $id, $width = 22 ) 
 {
 	global $skiional_fields;
 	
@@ -287,7 +287,7 @@ function ski_label_generate( $id, $width = 22 )
 	{
 		$$name = $label['_' . $name][0];	
 	}
-	$rtn = $_POST['rtn'] ?? '';
+	$rtn = $_POST['rtn'];
 
 	
 	$rtn .= " <div class='slider'>";
@@ -308,7 +308,7 @@ function ski_label_generate( $id, $width = 22 )
 					</ul>\n";
 	
   
-	$rtn .= "</div> <!-- /wp-skill-label -->\n\n";
+	$rtn .= "</div> <!-- /wp-clg-label -->\n\n";
 	return $rtn;  
 }
 
